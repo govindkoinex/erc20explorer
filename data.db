@@ -1,0 +1,4 @@
+{"$$indexCreated":{"fieldName":"balance","unique":false,"sparse":false}}
+{"$$indexCreated":{"fieldName":"timestamp","unique":false,"sparse":false}}
+{"$$indexCreated":{"fieldName":"args._from","unique":false,"sparse":false}}
+{"$$indexCreated":{"fieldName":"args._to","unique":false,"sparse":false}}

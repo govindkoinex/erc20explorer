@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,800,900');
+html{
+  zoom:90%;
+}
+
+body {
+  padding-top: 80px;
+  padding-bottom: 20px;
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 14px;
+}
+.nav-custom {
+  background: #0c6eb5 !important;
+  color: #fff !important;
+}
+
+.navbar-header {
+  font-size: 25px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.navbar-header .logo {
+  display: inline-block;
+}
+.navbar-header .logo img {
+  width: 40px;
+  height: 40px;
+}
+.navbar-header .version {
+  display: inline-block;
+  font-size: 10px;
+  vertical-align: top;
+  padding-top: 5px;
+  padding-left: 5px;
+}
+.navbar-header .brand {
+  display: inline-block;
+  vertical-align: middle;
+}
+.navbar-header .brand a {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  padding-left: 5px;
+}
+
+.navbar {
+  margin-bottom: 15px;
+}
+.navbar .inputnav
+{
+  border: 0px;
+margin-right: 10px;
+}
+.navbar .btn.accountcheck
+{
+  padding-top: 4px;
+    padding-bottom: 4px;
+    background: #ffffff;
+    color: #0c6eb5;
+    border: 4px solid #0c6eb5;
+}
+.navbar-right {
+  margin-right: 0px;
+}
+.top-header {
+  cursor: pointer;
+  padding-top: 15px;
+}
+.dropdown-list {
+  cursor: pointer;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.dropdown-list:hover {
+  background: #0c6eb5;
+  color: #fff;
+}
+.dropdown-list:hover a {
+  background: #0c6eb5 !important;
+  color: #fff !important;
+}
+.username {
+  text-transform: uppercase;
+}
+.navbar-nav > li > a {
+  padding-top: 5px;
+  padding-bottom: 20px;
+}
+
+.brand {
+  display: inline-block;
+}
+.navbar-default .navbar-nav > .open.navbar-default .navbar-nav > .open > a {
+  background: #fff;
+  color: #fff;
+}
+.dropdown-menu {
+  background: white;
+  color: #fff;
+  border: none;
+}
+.dropdown-menu li > a {
+  color: #0c6eb5;
+}
+.dropdown-menu li > a:hover {
+  color: #0c6eb5;
+  background: #fff;
+}
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus
+{
+  background:none;
+}
+@media (max-width: 978px) {
+    .container {
+      padding:5;
+      margin:0;
+    }
+    .top-header {
+      cursor: pointer;
+      padding-top: 0px;
+    }
+    .navbar-nav > li > a {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-left: 0px;
+    }
+    .navbar-form{
+      padding:10px 0px;
+    }
+    .navbar-right{
+      margin-right: initial;
+      margin-left: initial;
+      margin-bottom:0px;
+    }
+    .navbar .btn.accountcheck{
+      border: 0px;
+    }
+}
+
+a {
+  color: #00B7FF;
+}

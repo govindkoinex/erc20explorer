@@ -1,0 +1,63 @@
+include ./mixins/event.pug
+doctype html
+html(lang="en")
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1, user-scalable=no')
+    // The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
+
+    meta(name='description', content='The explorer for Ethereum ERC20 based tokens')
+    meta(name='author', content='bitfly')
+    meta(name='keywords', content='ethereum, explorer, blockchain, etherchain, cryptocurrency, cryptocurrencies, bitcoin, erc20')
+
+    title ERC20 Explorer
+
+    link(href=config.bootstrapUrl, rel="stylesheet", crossorigin="anonymous")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
+  body
+    nav.navbar.navbar-default.navbar-fixed-top.nav-custom
+      .container-fluid(style='padding-top: 5px;')
+        .navbar-header
+          .logo
+            img(src='https://koinex.in/koinex-logo-new.jpeg')
+          .brand
+            a(href='/')
+              b
+                | KOINEX
+          .version
+            | BETA
+          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+
+        #navbar.collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            li.top-header
+              a.white(href='/accounts') Accounts
+            li.top-header
+              a.white(href='/events') Events
+            li.top-header(style="padding-top:4px;")
+              form.navbar-form.navbar-right(action="/search", method="POST")
+                .form-group
+                  input.form-control.inputnav#search(type='text', placeholder='Account', name='search')
+                |
+                button.btn.btn-default.accountcheck(type='submit') Submit
+    .container
+      block content
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
+    script.
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+
+    div.container
+      hr
+      footer
+        p
+          a(href="https://github.com/gobitfly/erc20-explorer") ERC20 Explorer
+          |  | #{nodeStatus.version} | #{nodeStatus.nbrPeers} Peers connected
