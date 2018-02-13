@@ -9,9 +9,28 @@ body {
   font-family: 'Montserrat', sans-serif !important;
   font-size: 14px;
 }
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Montserrat', sans-serif !important;
+}
 .nav-custom {
   background: #0c6eb5 !important;
   color: #fff !important;
+}
+.navigate{
+  background: transparent;
+  border: 1px solid #0c6eb5;
+  font-family: 'Montserrat', sans-serif !important;
+  margin-top: 21px;
+  margin-bottom: 10.5px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #0c6eb5;
+}
+.highlight
+{
+  font-weight: bold;
+    font-size: 14px;
+    color: #0c6eb5;
 }
 
 .navbar-header {
@@ -47,18 +66,36 @@ body {
 .navbar {
   margin-bottom: 15px;
 }
-.navbar .inputnav
+ .inputnav
 {
-  border: 0px;
-margin-right: 10px;
+  position: relative;
+      display: block;
+      width: 100%;
+      -webkit-transition: all .2s ease;
+      transition: all .2s ease;
+      vertical-align: middle;
+      font-size: 14px;
+      line-height: 1.428571429;
+    padding: 12px 44px 12px 24px !important;
+      outline: none;
+      height: 32px;
+      background-clip: padding-box;
+      border: 1px solid rgba(10, 46, 96, 0.4);
+      border-radius: 40px;
+      outline-offset: -2px;
+    width: 100% !important;
 }
-.navbar .btn.accountcheck
+.btn.accountcheck
 {
   padding-top: 4px;
-    padding-bottom: 4px;
-    background: #ffffff;
-    color: #0c6eb5;
-    border: 4px solid #0c6eb5;
+padding-bottom: 4px;
+background: transparent;
+color: #0c6eb5;
+border: none;
+position: absolute;
+    right: 40px;
+    top: 36px;
+
 }
 .navbar-right {
   margin-right: 0px;
@@ -111,6 +148,37 @@ margin-right: 10px;
 {
   background:none;
 }
+.table-responsive
+{
+  -webkit-box-shadow: 0px 1px 5px #e7e7e7;
+box-shadow: 0px 1px 5px #e7e7e7;
+
+}
+.table{
+  font-size: 14px;
+  margin-bottom: 0;
+}
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td
+{
+text-align: center;
+height: 50px;
+font-weight: 400;
+vertical-align: middle;
+padding: 12px;
+border-bottom: 1px solid #eff1f4;
+border-top: 1px solid #eff1f4;
+background: transparent;
+line-height: 1.42857143;
+color: #333333;
+}
+.table>thead>tr:nth-child(odd), .table>tbody>tr:nth-child(odd), .table>tfoot>tr:nth-child(odd)
+{
+background: #f2f9ff;
+}
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th{
+  font-weight: bold;
+}
+
 @media (max-width: 978px) {
     .container {
       padding:5;
@@ -133,8 +201,11 @@ margin-right: 10px;
       margin-left: initial;
       margin-bottom:0px;
     }
-    .navbar .btn.accountcheck{
+    .btn.accountcheck{
       border: 0px;
+      position: absolute;
+    right: 20px;
+    top: 46px;
     }
 }
 

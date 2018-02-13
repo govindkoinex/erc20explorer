@@ -15,7 +15,7 @@ html(lang="en")
 
     link(href=config.bootstrapUrl, rel="stylesheet", crossorigin="anonymous")
     link(rel='stylesheet', href='/stylesheets/style.css')
-
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
   body
     nav.navbar.navbar-default.navbar-fixed-top.nav-custom
       .container-fluid(style='padding-top: 5px;')
@@ -36,16 +36,26 @@ html(lang="en")
 
         #navbar.collapse.navbar-collapse
           ul.nav.navbar-nav.navbar-right
+            li.dropdown.top-header
+              a.dropdown-toggle(data-toggle="dropdown" aria-expanded="false")
+                | ETHEREUM
+                i.fa.fa-angle-down(style="margin-left: 10px;")
+              ul.dropdown-menu
+                li.dropdown-list
+                  a.uppercase.ng-binding bitcoin
+                li.dropdown-list
+                  a.uppercase.ng-binding ether
+                li.dropdown-list
+                  a.uppercase.ng-binding ripple
+                li.dropdown-list
+                  a.uppercase.ng-binding litecoin
+                li.dropdown-list
+                  a.uppercase.ng-binding bitcoin cash
             li.top-header
               a.white(href='/accounts') Accounts
             li.top-header
               a.white(href='/events') Events
-            li.top-header(style="padding-top:4px;")
-              form.navbar-form.navbar-right(action="/search", method="POST")
-                .form-group
-                  input.form-control.inputnav#search(type='text', placeholder='Account', name='search')
-                |
-                button.btn.btn-default.accountcheck(type='submit') Submit
+
     .container
       block content
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js')
@@ -58,6 +68,5 @@ html(lang="en")
     div.container
       hr
       footer
-        p
-          a(href="https://github.com/gobitfly/erc20-explorer") ERC20 Explorer
-          |  | #{nodeStatus.version} | #{nodeStatus.nbrPeers} Peers connected
+        p.highlight
+          | #{nodeStatus.nbrPeers} Peers connected
