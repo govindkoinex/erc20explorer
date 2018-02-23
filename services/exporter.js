@@ -1,18 +1,18 @@
 var async = require('async');
 var Web3 = require('web3');
 
-var exporter = function(config, db) {
+var exporter = function(config, db, key) {
   var self = this;
   self.config = config;
   self.db = db;
-  
+
   self.web3 = new Web3();
   self.web3.setProvider(config.provider);
-  
-  self.contract = self.web3.eth.contract(config.erc20ABI).at(config.tokenAddress);
-  self.allEvents = self.contract.allEvents({fromBlock: config.exportStartBlock, toBlock: "latest"});
+
+  self.contract = self.web3.eth.contract(config.allCoins[key].erc20ABI).at(config.allCoins[key].tokenAddress);
+  self.allEvents = self.contract.allEvents({fromBlock: config.allCoins[key].exportStartBlock, toBlock: "latest"});
   self.newEvents = self.contract.allEvents();
-  
+
   // Processes new events
   self.newEvents.watch(function(err, log) {
     if (err) {
@@ -20,11 +20,11 @@ var exporter = function(config, db) {
       return;
     }
     console.log("New log received:", log);
-    
+
     self.processLog(log, function(err) {
       console.log("New log processed");
     });
-    
+
     if (log.event === "Transfer") {
       self.exportBalance(log.args._from);
       self.exportBalance(log.args._to);
@@ -34,7 +34,7 @@ var exporter = function(config, db) {
       self.exportBalance(log.args._spender);
     }
   });
-  
+
   // Retrieves historical events and processed them
   self.allEvents.get(function(err, logs) {
     console.log("Historical events received");
@@ -43,25 +43,25 @@ var exporter = function(config, db) {
       return;
     }
     var accounts = {};
-    
+
     logs.forEach(function(log) {
       if (log.event === "Transfer") {
         accounts[log.args._from] = log.args._from;
         accounts[log.args._to] = log.args._to;
       }
-      
+
       if (log.event === "Approval") {
         accounts[log.args._owner] = log.args._owner;
         accounts[log.args._spender] = log.args._spender;
       }
     });
-        
+
     async.eachSeries(logs, self.processLog, function(err) {
       console.log("All historical logs processed");
       self.exportBatchAccounts(accounts);
     });
   });
-  
+
   self.exportBatchAccounts = function(accounts) {
     async.eachSeries(accounts, function(item, callback) {
       self.exportBalance(item, callback);
@@ -69,25 +69,25 @@ var exporter = function(config, db) {
       console.log("All historical balances updated");
     });
   }
-  
-  self.processLog = function(log, callback) {  
+
+  self.processLog = function(log, callback) {
     log._id = log.blockNumber + "_" + log.transactionIndex + "_" + log.logIndex;
-    
+
     console.log("Exporting log:", log._id);
-    
+
     self.web3.eth.getBlock(log.blockNumber, false, function(err, block) {
       if (err) {
         console.log("Error retrieving block information for log:", err);
         callback();
         return;
       }
-      
+
       log.timestamp = block.timestamp;
-      
+
       if (log.args && log.args._value) {
         log.args._value = log.args._value.toNumber();
       }
-      
+
       self.db.insert(log, function(err, newLogs) {
         if (err) {
           if (err.message.indexOf("unique") !== -1) {
@@ -96,12 +96,12 @@ var exporter = function(config, db) {
             console.log("Error inserting log:", err);
           }
         }
-        
+
         callback();
       });
-    });    
+    });
   }
-  
+
   self.exportBalance = function(address, callback) {
     console.log("Exporting balance of", address);
     self.contract.balanceOf(address, function(err, balance) {
@@ -112,13 +112,13 @@ var exporter = function(config, db) {
         } else {
           console.log("Balance export completed");
         }
-        
+
         if (callback)
           callback();
       });
     });
   }
-  
+
   console.log("Exporter initialized, waiting for historical events...");
 }
 

@@ -4,13 +4,14 @@ block content
   .row
     .col-md-8
       h1
-        img(src='https://cgi.cryptoreport.com/images/coins/gnt.svg',style='width:50px;margin-right:10px;vertical-align:middle;')
-        | #{config.tokenName}
-      p Welcome to the #{config.tokenShortName} Explorer powered by koinex!
+        img(src='#{config.allCoins[coinkey].tokenImg}',style='width:50px;margin-right:10px;vertical-align:middle;')
+        | #{config.allCoins[coinkey].tokenName}
+      p Welcome to the #{config.allCoins[coinkey].tokenShortName} Explorer powered by koinex!
     .col-md-4(style="padding-top:22px")
       form.navbar-form.navbar-right(action="/search", method="POST",style="width:100%;")
         .form-group(style="width:100%")
           input.form-control.inputnav#search(type='text', placeholder='Account', name='search')
+          input.form-control.inputnav#search(type='hidden', value=coinkey}', name='coinkey')
         |
         button.btn.btn-default.accountcheck(type='submit')
           i.fa.fa-search

@@ -35,26 +35,23 @@ html(lang="en")
             span.icon-bar
 
         #navbar.collapse.navbar-collapse
+
+
+
+              li= index + ': ' + val
           ul.nav.navbar-nav.navbar-right
             li.dropdown.top-header
               a.dropdown-toggle(data-toggle="dropdown" aria-expanded="false")
-                | ETHEREUM
+                | #{config.allCoins[coinkey].tokenName
                 i.fa.fa-angle-down(style="margin-left: 10px;")
               ul.dropdown-menu
-                li.dropdown-list
-                  a.uppercase.ng-binding bitcoin
-                li.dropdown-list
-                  a.uppercase.ng-binding ether
-                li.dropdown-list
-                  a.uppercase.ng-binding ripple
-                li.dropdown-list
-                  a.uppercase.ng-binding litecoin
-                li.dropdown-list
-                  a.uppercase.ng-binding bitcoin cash
+                each val, index in #{config.allCoins}
+                  li.dropdown-list
+                    a.uppercase.ng-binding val.tokenName(href="/"+coinkey)                
             li.top-header
-              a.white(href='/accounts') Accounts
+              a.white(href='/accounts/'+coinkey) Accounts
             li.top-header
-              a.white(href='/events') Events
+              a.white(href='/events/'+coinkey) Events
 
     .container
       block content
