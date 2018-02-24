@@ -2,7 +2,7 @@ extends layout
 
 block content
   h3 Account #{balance._id}
-  h4.highlight Balance: #{tokenformatter.format(balance.balance)}
+  h4.highlight Balance: #{tokenformatter.format(balance.balance,coinkey)}
 
   .row
     .col-md-10

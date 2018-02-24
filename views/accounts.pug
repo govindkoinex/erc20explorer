@@ -20,4 +20,4 @@ block content
             tr
               td
                 a(href="/account/"+coinkey+"/" + account._id) #{account._id}
-              td #{tokenformatter.format(account.balance)}
+              td #{tokenformatter.format(account.balance,coinkey)}

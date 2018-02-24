@@ -23,7 +23,7 @@ html(lang="en")
           .logo
             img(src='https://koinex.in/koinex-logo-new.jpeg')
           .brand
-            a(href='/')
+            a(href='/'+coinkey)
               b
                 | KOINEX
           .version
@@ -35,19 +35,15 @@ html(lang="en")
             span.icon-bar
 
         #navbar.collapse.navbar-collapse
-
-
-
-              li= index + ': ' + val
           ul.nav.navbar-nav.navbar-right
             li.dropdown.top-header
               a.dropdown-toggle(data-toggle="dropdown" aria-expanded="false")
-                | #{config.allCoins[coinkey].tokenName
+                | #{config.allCoins[coinkey].tokenName}
                 i.fa.fa-angle-down(style="margin-left: 10px;")
               ul.dropdown-menu
-                each val, index in #{config.allCoins}
+                each val, index in config.allCoins
                   li.dropdown-list
-                    a.uppercase.ng-binding val.tokenName(href="/"+coinkey)                
+                    a.uppercase.ng-binding #{val.tokenName}
             li.top-header
               a.white(href='/accounts/'+coinkey) Accounts
             li.top-header

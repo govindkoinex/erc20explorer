@@ -7,7 +7,7 @@ mixin event_row(event)
         a(href="/account/"+coinkey+"/" + event.args._from) #{event.args._from}
       td
         a(href="/account/"+coinkey+"/" + event.args._to) #{event.args._to}
-      td #{tokenformatter.format(event.args._value)}
+      td #{tokenformatter.format(event.args._value,coinkey)}
       td #{moment(event.timestamp * 1000).fromNow()}
   if event.event === "Approval"
     tr
@@ -17,5 +17,5 @@ mixin event_row(event)
         a(href="/account/"+coinkey+"/" + event.args._owner) #{event.args._owner}
       td
         a(href="/account/"+coinkey+"/" + event.args._spender) #{event.args._spender}
-      td #{tokenformatter.format(event.args._value)}
+      td #{tokenformatter.format(event.args._value,coinkey)}
       td #{moment(event.timestamp * 1000).fromNow()}

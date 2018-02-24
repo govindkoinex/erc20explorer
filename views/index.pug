@@ -4,35 +4,18 @@ block content
   .row
     .col-md-8
       h1
-        img(src='#{config.allCoins[coinkey].tokenImg}',style='width:50px;margin-right:10px;vertical-align:middle;')
+        img(src=config.allCoins[coinkey].tokenImg,style='width:50px;margin-right:10px;vertical-align:middle;')
         | #{config.allCoins[coinkey].tokenName}
       p Welcome to the #{config.allCoins[coinkey].tokenShortName} Explorer powered by koinex!
     .col-md-4(style="padding-top:22px")
       form.navbar-form.navbar-right(action="/search", method="POST",style="width:100%;")
         .form-group(style="width:100%")
           input.form-control.inputnav#search(type='text', placeholder='Account', name='search')
-          input.form-control.inputnav#search(type='hidden', value=coinkey}', name='coinkey')
+          input(type='hidden', value=coinkey, name='coinkey')
         |
         button.btn.btn-default.accountcheck(type='submit')
           i.fa.fa-search
-    #tv-medium-widget-26e30.col-md-12
-    script(type="text/javascript" src="https://s3.tradingview.com/tv.js")
-    script(type="text/javascript").
-      new TradingView.MediumWidget({
-      "container_id": "tv-medium-widget-26e30",
-      "symbols": [
-      "BITTREX:GNTBTC|1y"
-      ],
-      "greyText": "Quotes by",
-      "gridLineColor": "#e9e9ea",
-      "fontColor": "#83888D",
-      "underLineColor": "#dbeffb",
-      "trendLineColor": "#4bafe9",
-      "width": "100%",
-      "height": "100%",
-      "locale": "in"
-      });
-  .row
+    .row
     .col-md-12
       h3 Recent transactions
   .row
