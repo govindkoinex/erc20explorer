@@ -6,6 +6,9 @@ router.get('/:coinkey', function(req, res, next) {
   var db = req.app.get('db');
   var config = req.app.get('config');
   var coinkey = req.params.coinkey;
+  console.log("oivin",req.params);
+  
+
   db[coinkey].find({}).sort({ timestamp: -1 }).limit(10).exec(function (err, events) {
 
     res.render('index', { events: events, coinkey:coinkey,config:config  });

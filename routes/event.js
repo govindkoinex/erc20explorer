@@ -1,18 +1,30 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/:coinkey/:event', function(req, res, next) {
+router.get('/:coinkey/:type/:event', function(req, res, next) {
   var db = req.app.get('db');
   var config = req.app.get('config');
-  db[req.params.coinkey].find({_id: req.params.event}).exec(function (err, event) {
+  console.log("tyep:"+req.params.type);
+  if (req.params.type == 'id')
+  {
+    var parameter = {_id: req.params.event};
+  }
+  else if(req.params.type=='TxHash')
+  {
+    var parameter = {transactionHash: req.params.event};
+  }
+  else{
+    console.log("didnot match");
+  }
+
+  db[req.params.coinkey].find(parameter).exec(function (err, event) {
 
     if (err) {
-      console.log("govind1");
-      return next(err);
+
+      return next({message: err,coinkey:req.params.coinkey,config:config });
     }
 
     if (event.length === 0 || !event[0]._id) {
-console.log("govind2");
       return next({message: "Event not found!",coinkey:req.params.coinkey,config:config });
     }
 

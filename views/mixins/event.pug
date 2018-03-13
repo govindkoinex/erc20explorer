@@ -2,7 +2,7 @@ mixin event_row(event)
   if event.event === "Transfer"
     tr
       td
-        a(href="/event/"+coinkey+"/" + event._id) #{event.event}
+        a(href="/event/"+coinkey+"/id/" + event._id) #{event.event}
       td
         a(href="/account/"+coinkey+"/" + event.args._from) #{event.args._from}
       td
@@ -12,7 +12,7 @@ mixin event_row(event)
   if event.event === "Approval"
     tr
       td
-        a(href="/event/"+coinkey+"/" + event._id) #{event.event}
+        a(href="/event/"+coinkey+"/id/" + event._id) #{event.event}
       td
         a(href="/account/"+coinkey+"/" + event.args._owner) #{event.args._owner}
       td

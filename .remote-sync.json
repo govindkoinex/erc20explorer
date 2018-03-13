@@ -1,0 +1,17 @@
+{
+  "uploadOnSave": true,
+  "useAtomicWrites": false,
+  "deleteLocal": false,
+  "hostname": "52.66.74.222",
+  "port": "22",
+  "target": "erc20explorer",
+  "ignore": [
+    ".remote-sync.json",
+    ".git/**"
+  ],
+  "username": "ubuntu",
+  "keyfile": "/Users/govindvaid/.ssh/id_rsa",
+  "watch": [],
+  "transport": "scp",
+  "passphrase": "koinex123"
+}

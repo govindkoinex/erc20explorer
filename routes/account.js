@@ -1,9 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/:coinkey/:account/:offset?', function(req, res, next) {
+router.get('/:coinkey/:account?/:offset?', function(req, res, next) {
+
   var db = req.app.get('db');
   var config = req.app.get('config');
+  if (!req.params.account) {
+    res.redirect('/accounts/'+req.params.coinkey);
+  }
   if (!req.params.offset) {
     req.params.offset = 0;
   } else {
@@ -12,8 +16,8 @@ router.get('/:coinkey/:account/:offset?', function(req, res, next) {
   db[req.params.coinkey].find({_id: req.params.account}).exec(function (err, balance) {
 
     if (err) {
-      console.log("govind4");
-      return next(err);
+      //return next(err);
+      return next({message: "Account not found!",coinkey:req.params.coinkey,config:config});
     }
 
     if (balance.length === 0 || !balance[0]._id) {

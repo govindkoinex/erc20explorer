@@ -48,11 +48,27 @@ var exporter = function(config, db, key) {
       if (log.event === "Transfer") {
         accounts[log.args._from] = log.args._from;
         accounts[log.args._to] = log.args._to;
+        if(log.args._from == undefined)
+        {
+          console.log('log.args._from is undefined');
+        }
+        if(log.args._to == undefined)
+        {
+          console.log('log.args._to is undefined');
+        }
       }
 
       if (log.event === "Approval") {
         accounts[log.args._owner] = log.args._owner;
         accounts[log.args._spender] = log.args._spender;
+        if(log.args._owner == undefined)
+        {
+          console.log('log.args._from is undefined');
+        }
+        if(log.args._spender == undefined)
+        {
+          console.log('log.args._to is undefined');
+        }
       }
     });
 

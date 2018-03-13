@@ -27,7 +27,7 @@ html(lang="en")
               b
                 | KOINEX
           .version
-            | BETA
+            | - EXPLORER
           button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
             span.sr-only Toggle navigation
             span.icon-bar
@@ -43,7 +43,7 @@ html(lang="en")
               ul.dropdown-menu
                 each val, index in config.allCoins
                   li.dropdown-list
-                    a.uppercase.ng-binding #{val.tokenName}
+                    a.uppercase.ng-binding(href='/'+val.tokenShortName) #{val.tokenName}
             li.top-header
               a.white(href='/accounts/'+coinkey) Accounts
             li.top-header
