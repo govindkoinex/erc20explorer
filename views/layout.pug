@@ -23,9 +23,15 @@ html(lang="en")
           .logo
             img(src='https://koinex.in/koinex-logo-new.jpeg')
           .brand
-            a(href='/'+coinkey)
-              b
-                | KOINEX
+            if coinkey == 'ALL TOKENS'
+              a(href='/')
+                b
+                  | KOINEX
+            else
+              a(href='/'+coinkey)
+                b
+                  | KOINEX
+
           .version
             | - EXPLORER
           button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
@@ -38,9 +44,14 @@ html(lang="en")
           ul.nav.navbar-nav.navbar-right
             li.dropdown.top-header
               a.dropdown-toggle(data-toggle="dropdown" aria-expanded="false")
-                | #{config.allCoins[coinkey].tokenName}
+                if coinkey == 'ALL TOKENS'
+                  | ALL TOKENS
+                else
+                  | #{config.allCoins[coinkey].tokenName}
                 i.fa.fa-angle-down(style="margin-left: 10px;")
               ul.dropdown-menu
+                li.dropdown-list
+                  a.uppercase.ng-binding(href='/') ALL TOKENS
                 each val, index in config.allCoins
                   li.dropdown-list
                     a.uppercase.ng-binding(href='/'+val.tokenShortName) #{val.tokenName}

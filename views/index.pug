@@ -3,10 +3,14 @@ extends layout
 block content
   .row
     .col-md-8
-      h1
-        img(src=config.allCoins[coinkey].tokenImg,style='width:50px;margin-right:10px;vertical-align:middle;')
-        | #{config.allCoins[coinkey].tokenName}
-      p Welcome to the #{config.allCoins[coinkey].tokenShortName} Explorer powered by koinex!
+      if coinkey != 'ALL TOKENS'
+        h1
+          img(src=config.allCoins[coinkey].tokenImg,style='width:50px;margin-right:10px;vertical-align:middle;')
+          | #{config.allCoins[coinkey].tokenName}
+        p Welcome to the #{config.allCoins[coinkey].tokenShortName} Explorer powered by koinex!
+      else
+        h1
+          | Welcome to the Token Explorer powered by koinex!
     .col-md-4(style="padding-top:22px")
       form.navbar-form.navbar-right(action="/search", method="POST",style="width:100%;")
         .form-group(style="width:100%")
@@ -19,14 +23,15 @@ block content
     .col-md-12
       h3 Recent transactions
   .row
-    .col-md-12
-      .table-responsive
-        table.table
-          tr
-            th Type
-            th From
-            th To
-            th Amount
-            th Date
-          for event in events
-            +event_row(event)
+    for keycoin in coinArr
+      .col-md-6
+        .table-responsive
+          table.table
+            tr
+              th Type
+              th From
+              th To
+              th Amount
+              th Date
+            for event in events[keycoin]
+              +event_row(event,keycoin)
