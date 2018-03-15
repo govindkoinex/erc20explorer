@@ -1,4 +1,5 @@
 include ./mixins/event.pug
+include ./mixins/allevent.pug
 doctype html
 html(lang="en")
   head
@@ -23,7 +24,7 @@ html(lang="en")
           .logo
             img(src='https://koinex.in/koinex-logo-new.jpeg')
           .brand
-            if coinkey == 'ALL TOKENS'
+            if coinkey == 'ALL'
               a(href='/')
                 b
                   | KOINEX
@@ -44,7 +45,7 @@ html(lang="en")
           ul.nav.navbar-nav.navbar-right
             li.dropdown.top-header
               a.dropdown-toggle(data-toggle="dropdown" aria-expanded="false")
-                if coinkey == 'ALL TOKENS'
+                if coinkey == 'ALL'
                   | ALL TOKENS
                 else
                   | #{config.allCoins[coinkey].tokenName}

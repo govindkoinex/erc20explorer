@@ -158,6 +158,7 @@ box-shadow: 0px 1px 5px #e7e7e7;
 .table{
   font-size: 14px;
   margin-bottom: 0;
+  table-layout: fixed;
 }
 .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td
 {
@@ -171,6 +172,8 @@ border-top: 1px solid #eff1f4;
 background: transparent;
 line-height: 1.42857143;
 color: #333333;
+text-overflow: ellipsis;
+overflow: hidden;
 }
 .table>thead>tr:nth-child(odd), .table>tbody>tr:nth-child(odd), .table>tfoot>tr:nth-child(odd)
 {
@@ -211,5 +214,105 @@ background: #f2f9ff;
 }
 
 a {
-  color: #00B7FF;
+  color: #0c6eb5;
+}
+
+.gridlayout .text-ellipses {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  text-align: left;
+}
+.gridlayout .thirdchild_1 {
+  width: 80px;
+  float: left;
+  text-align: left;
+}
+.gridlayout .thirdchild_2 {
+  width: calc(100% - 80px);
+  float: left;
+  text-align: right;
+
+}
+.gridlayout .secondchild_2 {
+  width: 12px;
+  float: left;
+  margin: 0px 8px;
+}
+.gridlayout .secondchild_1 {
+  width: calc(50% - 14px);
+  float: left;
+}
+.gridlayout .secondchild_1 a span {
+  color: #999;
+  margin-right: 5px;
+  text-align: left;
+}
+.gridlayout .firstchild_1 {
+  width: calc(100% - 150px);
+  float: left;
+  text-align: left;
+}
+.gridlayout .firstchild_1 a span {
+  color: #555;
+}
+.gridlayout .firstchild_2 {
+  width: 150px;
+  float: left;
+  text-align: right;
+}
+.tokenTitle{
+  width: calc(100% - 120px);
+  float: left;
+  text-align: left;
+  font-size: 18px;
+  text-transform: uppercase;
+
+}
+.tokenTitle   img{
+    width: 50px;
+  margin-right: 10px;
+  vertical-align: middle;
+  }
+.viewall{
+  width: 120px;
+float: left;
+height: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.themeanchor{
+  text-align: center;
+height: auto;
+border-radius: 0;
+border: none;
+background: #0c6eb5;
+color: #ffffff;
+width: 100%;
+display: block;
+padding: 10px;
+text-transform: uppercase;
+font-weight: normal;
+}
+.themeanchor:hover{
+  color:white;
+  text-decoration: none;
+}
+.margin-bottom-10{
+  margin-bottom:10px;
+}
+.margin-left-10{
+  margin-left:10px;
+}
+.margin-right-10{
+  margin-right:10px;
+}
+.text-align-left{
+  text-align: left !important;
+}
+
+.text-align-right{
+  text-align: right !important;
 }

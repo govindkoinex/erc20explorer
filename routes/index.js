@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/:coinkey?', function(req, res, next) {
   var db = req.app.get('db');
   var config = req.app.get('config');
-  if (req.params.coinkey){
+  if (req.params.coinkey && (req.params.coinkey).toLowerCase()!='all'){
     var coinkey = req.params.coinkey;
     db[coinkey].find({}).sort({ timestamp: -1 }).limit(10).exec(function (err, events) {
 
@@ -14,24 +14,25 @@ router.get('/:coinkey?', function(req, res, next) {
   }
   else{
     var fullevents={};
-    var querycount =0;
-    var keys=Object.keys(config.allCoins);
-    keys.map(function(elem) {
-      db[elem].find({}).sort({ timestamp: -1 }).limit(10).exec(function (err, events) {
-        fullevents[elem]=events;
-        // events.map(function(element){
-        //   element["coin"]=elem;
-        // });
-        // fullevents=fullevents.concat(events);
+    var keys=[];
 
-        querycount++;
-        if(querycount==keys.length)
-        {
-          console.log('all e',fullevents);
-          res.render('index', { events: fullevents, coinkey:'ALL TOKENS',config:config,coinArr:keys  });
-        }
+      Promise.all(
+        Object.keys(config.allCoins).map(function(elem) {
+          return new Promise(function(resolve, reject) {
+            db[elem].find({}).sort({ timestamp: -1 }).limit(5).exec(function (err, events) {
+              if(events.length > 0)
+              {
+                fullevents[elem]=events;
+                keys.push(elem);
+              }
+              resolve();
+              });
+            });
+          })
+        ).then(function(values) {
+        res.render('index', { events: fullevents, coinkey:'ALL',config:config,coinArr:keys  });
       });
-    });
+
   }
 
 });

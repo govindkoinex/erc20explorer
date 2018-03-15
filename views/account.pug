@@ -1,28 +1,53 @@
 extends layout
 
 block content
-  h3 Account #{balance._id}
-  h4.highlight Balance: #{tokenformatter.format(balance.balance,coinkey)}
+
+  if coinkey != 'ALL'
+    h3 Account #{balance._id}
+    h4.highlight Balance: #{tokenformatter.format(balance.balance,coinkey)}
+  else
+    h3 Account #{accountid}
 
   .row
     .col-md-10
       h3 Transactions
-    .col-md-1
-      if offset - stepSize >= 0
-        a.btn.btn-default.navigate(href="/account/"+coinkey+"/" + balance._id + "/" + (offset - stepSize)) Previous
+    if coinkey != 'ALL'
+      .col-md-1
+        if offset - stepSize >= 0
+          a.btn.btn-default.navigate(href="/account/"+coinkey+"/" + balance._id + "/" + (offset - stepSize)) Previous
 
-    .col-md-1
-        a.btn.btn-default.navigate(href="/account/"+coinkey+"/" + balance._id + "/" + (offset + stepSize)) Next
+      .col-md-1
+          a.btn.btn-default.navigate(href="/account/"+coinkey+"/" + balance._id + "/" + (offset + stepSize)) Next
 
   .row
-    .col-md-12
-      .table-responsive
-        table.table
-          tr
-            th Type
-            th From
-            th To
-            th Amount
-            th Date
-          for event in events
-            +event_row(event)
+    if coinkey == 'ALL'
+      for keycoin in coinArr
+        .col-md-6
+          .table-responsive
+            table.table
+              tr
+                th
+                  div.tokenTitle
+                    table
+                      tr
+                        td(rowspan="2")
+                          img(src=config.allCoins[keycoin].tokenImg)
+                        td(style="font-size:18px;") #{config.allCoins[keycoin].tokenName}
+                      tr
+                        td Balance: #{tokenformatter.format(balance[keycoin].balance,keycoin)}
+                  div.viewall
+                    a.themeanchor(href='/account/'+keycoin+'/'+accountid) View All
+              for event in events[keycoin]
+                +allEvent_row(event,keycoin)
+    else
+      .col-md-12
+        .table-responsive
+          table.table
+            tr
+              th Type
+              th From
+              th To
+              th Amount
+              th Date
+            for event in events
+              +event_row(event,coinkey)

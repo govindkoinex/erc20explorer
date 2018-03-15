@@ -3,14 +3,16 @@ extends layout
 block content
   .row
     .col-md-8
-      if coinkey != 'ALL TOKENS'
+      if coinkey != 'ALL'
         h1
           img(src=config.allCoins[coinkey].tokenImg,style='width:50px;margin-right:10px;vertical-align:middle;')
           | #{config.allCoins[coinkey].tokenName}
         p Welcome to the #{config.allCoins[coinkey].tokenShortName} Explorer powered by koinex!
+        h3 Recent transactions
       else
         h1
           | Welcome to the Token Explorer powered by koinex!
+        h3(style="margin-bottom:30px;") Recent transactions
     .col-md-4(style="padding-top:22px")
       form.navbar-form.navbar-right(action="/search", method="POST",style="width:100%;")
         .form-group(style="width:100%")
@@ -19,12 +21,25 @@ block content
         |
         button.btn.btn-default.accountcheck(type='submit')
           i.fa.fa-search
-    .row
-    .col-md-12
-      h3 Recent transactions
+
+
   .row
-    for keycoin in coinArr
-      .col-md-6
+    if coinkey == 'ALL'
+      for keycoin in coinArr
+        .col-md-6
+          .table-responsive
+            table.table
+              tr
+                th
+                  div.tokenTitle
+                    img(src=config.allCoins[keycoin].tokenImg)
+                    | #{config.allCoins[keycoin].tokenName} Transactions
+                  div.viewall
+                    a.themeanchor(href='/'+keycoin) View All
+              for event in events[keycoin]
+                +allEvent_row(event,keycoin)
+    else
+      .col-md-12
         .table-responsive
           table.table
             tr
@@ -33,5 +48,5 @@ block content
               th To
               th Amount
               th Date
-            for event in events[keycoin]
-              +event_row(event,keycoin)
+            for event in events
+              +event_row(event,coinkey)

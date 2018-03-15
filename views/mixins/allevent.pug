@@ -1,0 +1,51 @@
+mixin allEvent_row(event,coinkey)
+  if event.event === "Transfer"
+    tr
+      td.row.gridlayout
+        .col-lg-12.margin-bottom-10
+          .firstchild_1
+            a.text-ellipses(href="/event/"+coinkey+"/id/" + event._id,style="font-size: 16px;")
+              span TX#
+              | #{event.transactionHash}
+          .firstchild_2 #{moment(event.timestamp * 1000).fromNow()}
+        .col-lg-12.margin-bottom-10
+          .secondchild_1
+            a.text-ellipses(href="/account/"+coinkey+"/" + event.args._from)
+              span From:
+              | #{event.args._from}
+          .secondchild_2
+            i.fa.fa-long-arrow-right
+          .secondchild_1
+            a.text-ellipses(href="/account/"+coinkey+"/" + event.args._to)
+              span To:
+              |#{event.args._to}
+        .col-lg-12
+          .thirdchild_1
+            a(href="/event/"+coinkey+"/id/" + event._id) #{event.event}
+          .thirdchild_2 #{tokenformatter.format(event.args._value,coinkey)}
+
+
+  if event.event === "Approval"
+    tr
+      td.row.gridlayout
+        .col-lg-12.margin-bottom-10
+          .firstchild_1
+            a.text-ellipses(href="/event/"+coinkey+"/id/" + event._id,style="font-size: 16px;")
+              span TX#
+              | #{event.transactionHash}
+          .firstchild_2 #{moment(event.timestamp * 1000).fromNow()}
+        .col-lg-12.margin-bottom-10
+          .secondchild_1
+            a.text-ellipses(href="/account/"+coinkey+"/" + event.args._owner)
+              span From:
+              | #{event.args._owner}
+          .secondchild_2
+            i.fa.fa-long-arrow-right
+          .secondchild_1
+            a.text-ellipses(href="/account/"+coinkey+"/" + event.args._spender)
+              span To:
+              |#{event.args._spender}
+        .col-lg-12
+          .thirdchild_1
+            a(href="/event/"+coinkey+"/id/" + event._id) #{event.event}
+          .thirdchild_2 #{tokenformatter.format(event.args._value,coinkey)}
